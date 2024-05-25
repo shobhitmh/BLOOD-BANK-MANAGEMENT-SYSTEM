@@ -18,7 +18,7 @@ font-family: 'Averia Gruesa Libre';font-size: 15px;
   margin: 0;
   padding: 0;
   width: 210px;
-  background-color: #333333;
+  background-color: black;
   position: fixed;
   height: 100%;
   overflow: auto;
@@ -36,7 +36,7 @@ font-family: 'Averia Gruesa Libre';font-size: 15px;
 
 
 .sidebar a:hover:not(.active) {
-  background-color: #555;
+  background-color: red;
   color: white;
 }
 
@@ -56,7 +56,7 @@ div.content {
   div.content {margin-left: 0;}
 }
 a.act{
-background: linear-gradient(to right, #00C9FF 0%, #92FE9D 100%);
+background: linear-gradient(to right, red , white);
 color: black;
 border-radius:10px;
 }
@@ -78,7 +78,7 @@ border-radius:10px;
   <a href="donor_list.php"   <?php if($active=='list') echo "class='act'"; ?>><span class="glyphicon glyphicon-list-alt"></span>&nbsp&nbsp Donor List</a>
   <a href="query.php"   <?php if($active=='query') echo "class='act'"; ?>><span class="glyphicon glyphicon-check"></span>&nbsp&nbspCheck Contactus Query</a>
 
-    <a href="pages.php"   <?php if($active=='pages') echo "class='act'"; ?>><span class="glyphicon glyphicon-edit"></span>&nbsp&nbspManage Pages</a>
+    <a href="pages.php"   <?php if($active=='pages') echo "class='act'"; ?>><span class="glyphicon glyphicon-edit"></span>&nbsp&nbspEdit Pages</a>
   <a href="update_contact.php"   <?php if($active=='contact') echo "class='act'"; ?>><span class="glyphicon glyphicon-edit"></span>&nbsp&nbspUpdate Contact Info</a>
 
 </div>

@@ -12,6 +12,59 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
+    .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background: linear-gradient(200deg, red, red);
+            color: white;
+            padding: 15px;
+            font-size: 20px;
+            text-align: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin: 0;
+        }
+
+        .card-body {
+            padding: 20px;
+            font-size: 16px;
+            color: #333;
+            text-align: left;
+            height: 120px;
+            overflow: auto;
+        }
+
+        .card-body p {
+            margin: 0;
+        }
+        h1 {
+            font-family: "Palatino";
+          }
+          h2 {
+    font-family: "Palatino";
+    /* Add any other styles you want */
+}
+h3 {
+            font-family: "Palatino";
+          }
+          h4 {
+            font-family: "Palatino";
+          }
+          a {
+            font-family: "Palatino";
+          }
+          
 </style>
 </head>
 
@@ -22,9 +75,7 @@ $active="home";
 include('head.php'); ?>
 
 </div>
-<?php include'ticker.php'; ?>
-
-  <div id="page-container" style="margin-top:50px; position: relative;min-height: 84vh;   ">
+<div id="page-container" style="margin-top:50px; position: relative;min-height: 84vh;   ">
     <div class="container">
     <div id="content-wrap"style="padding-bottom:75px;">
   <div id="demo" class="carousel slide" data-ride="carousel">
@@ -38,10 +89,22 @@ include('head.php'); ?>
     <!-- The slideshow -->
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="image\_107317099_blooddonor976.jpg" alt="image\_107317099_blooddonor976.jpg" width="100%" height="500">
+      <img src="image\headimage2.png" alt="image\headimage2.png" width="100%" height="500">
+
+
       </div>
       <div class="carousel-item">
-        <img src="image\Blood-facts_10-illustration-graphics__canteen.png" alt="image\Blood-facts_10-illustration-graphics__canteen.png" width="100%" height="500">
+      <img src="image\headimage.png" alt="image\headimage.png" width="100%" height="500">
+
+      </div>
+      <div class="carousel-item">
+      <img src="image\1232.png" alt="image\1232.png" width="100%" height="500">
+
+      </div>
+      <div class="carousel-item">
+      <img src="image\Blood-facts_10-illustration-graphics__canteen.png" alt="image\Blood-facts_10-illustration-graphics__canteen.png" width="100%" height="500">
+
+
       </div>
 
     </div>
@@ -55,12 +118,11 @@ include('head.php'); ?>
     </a>
   </div>
 <br>
-        <h1 style="text-align:center;font-size:45px;">Welcome to BloodBank & Donor Management System</h1>
 <br>
         <div class="row">
             <div class="col-lg-4 mb-4">
                 <div class="card">
-                    <h4 class="card-header card bg-info text-white" >The need for blood</h4>
+                    <h4 class="card-header card bg-info text-white" >Blood Requirement</h4>
 
                         <p class="card-body overflow-auto" style="padding-left:2%;height:120px;text-align:left;">
                           <?php
@@ -79,7 +141,7 @@ include('head.php'); ?>
             </div>
             <div class="col-lg-4 mb-4">
                 <div class="card">
-                    <h4 class="card-header card bg-info text-white">Blood Tips</h4>
+                    <h4 class="card-header card bg-info text-white">Prerequisite for Donor</h4>
 
                     <p class="card-body overflow-auto" style="padding-left:2%;height:120px;text-align:left;">
                       <?php
@@ -99,7 +161,7 @@ include('head.php'); ?>
             </div>
             <div class="col-lg-4 mb-4">
                 <div class="card">
-                    <h4 class="card-header card bg-info text-white" >Who you could Help</h4>
+                    <h4 class="card-header card bg-info text-white" >People you could help</h4>
 
                     <p class="card-body overflow-auto" style="padding-left:2%;height:120px;text-align:left;">
                       <?php
@@ -120,7 +182,7 @@ include('head.php'); ?>
             </div>
 </div>
 
-        <h2>Blood Donor Names</h2>
+        <h2>Our Blood Donors</h2>
 
         <div class="row">
           <?php
@@ -133,7 +195,7 @@ include('head.php'); ?>
            ?>
             <div class="col-lg-4 col-sm-6 portfolio-item" ><br>
             <div class="card" style="width:300px">
-                <img class="card-img-top" src="image\blood_drop_logo.jpg" alt="Card image" style="width:100%;height:300px">
+                <img class="card-img-top" src="image\Untitled design (1).png" alt="Card image" style="width:100%;height:300px">
                 <div class="card-body">
                   <h3 class="card-title"><?php echo $row['donor_name']; ?></h3>
                   <p class="card-text">
@@ -149,6 +211,8 @@ include('head.php'); ?>
         </div>
       <?php }} ?>
 </div>
+<br>
+
 <br>
         <!-- /.row -->
 
@@ -171,7 +235,7 @@ include('head.php'); ?>
 
             </div>
             <div class="col-lg-6">
-                <img class="img-fluid rounded" src="image\blood_donationcover.jpeg" alt="" >
+                <img class="img-fluid rounded" src="image\DONATE BLOOD.png" alt="" >
             </div>
         </div>
         <!-- /.row -->
@@ -181,7 +245,7 @@ include('head.php'); ?>
         <!-- Call to Action Section -->
         <div class="row mb-4">
             <div class="col-md-8">
-            <h4>UNIVERSAL DONORS AND RECIPIENTS</h4>
+            <h4>GLOBAL GIVORS AND RECEIVORS</h4>
             <p>
               <?php
                 include 'conn.php';
@@ -196,7 +260,7 @@ include('head.php'); ?>
                ?></p>
               </div>
             <div class="col-md-4">
-                <a class="btn btn-lg btn-secondary btn-block" href="donate_blood.php" style="align:center; background-color:#7FB3D5;color:#273746 ">Become a Donor </a>
+            <a class="btn btn-lg btn-secondary btn-block" href="donate_blood.php" style="align:center; background-color:red; color:white; border-radius: 25px;">Donate Blood </a>
             </div>
         </div>
 
