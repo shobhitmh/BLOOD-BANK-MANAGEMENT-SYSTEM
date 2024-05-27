@@ -11,6 +11,7 @@ donor_age int(60) NOT NULL,
 donor_gender varchar(10) NOT NULL,
 donor_blood varchar(10) NOT NULL,
 donor_address varchar(100) NOT NULL,
+
 Primary key(donor_id)
 );
 /*create table admin_info in which all admin information gets stored.*/
@@ -24,7 +25,7 @@ Primary key(admin_id)
 
 /*  insert admin data into admin_info table*/
 insert into admin_info(admin_name,admin_username,admin_password)
-values("Varun","varunsardana004",123);
+values("Shobhit","Shobhit123",890);
 
 /*create table blood in which all blood group is stored.*/
 create table blood(
@@ -58,35 +59,35 @@ primary key(contact_id)
 );
 
 insert into contact_info(contact_address,contact_mail,contact_phone)
-values("Hisar,Haryana(125001)","bloodbank@gmail.com","7056550477");
+values("181 Jayalakshmipiuram Colony, 2nd main road","shobhitmhase24@gmail.com","7056550477");
 
 
 
 INSERT INTO pages (page_id, page_name, page_type, page_data) VALUES
 (2, 'Why Become Donor', 'donor', '<span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Blood is the most precious gift that anyone can give to another person — the gift of life. A decision to donate your blood can save a life, or even several if your blood is separated into its components — red cells, platelets and plasma — which can be used individually for patients with specific conditions. Safe blood saves lives and improves health. Blood transfusion is needed for:
-1)women with complications of pregnancy, such as ectopic pregnancies and haemorrhage before, during or after childbirth.
-2)children with severe anaemia often resulting from malaria or malnutrition.
-3)people with severe trauma following man-made and natural disasters.
-4)many complex medical and surgical procedures and cancer patients.
-It is also needed for regular transfusions for people with conditions such as thalassaemia and sickle cell disease and is used to make products such as clotting factors for people with haemophilia. There is a constant need for regular blood supply because blood can be stored for only a limited time before use. Regular blood donations by a sufficient number of healthy people are needed to ensure that safe blood will be available whenever and wherever it is needed.</span>'),
-(3, 'About Us ', 'aboutus', '<span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify;">Blood bank is a place where blood bag that is collected from blood donation events is stored in one place. The term “blood bank” refers to a division of a hospital laboratory where the storage of blood product occurs and where proper testing is performed to reduce the risk of transfusion related events . The process of managing the blood bag that is received from the blood donation events needs a proper and systematic management. The blood bag must be handled with care and treated thoroughly as it is related to someone’s life. The development of Web-based Blood Bank And Donation Management System (BBDMS) is proposed to provide a management functional to the blood bank in order to handle the blood bag and to make entries of the individuals who want to donate blood and who are in need.</span>');
+
+women with complications of pregnancy, such as ectopic pregnancies and haemorrhage before, during or after childbirth.
+children with severe anaemia often resulting from malaria or malnutrition.
+people with severe trauma following man-made and natural disasters.
+many complex medical and surgical procedures and cancer patients.
+
+Donating blood is a simple yet profoundly impactful way to contribute to the health and well-being of others. It saves lives, supports medical facilities, advances research, and provides personal health benefits and fulfillment. In a world where our time and resources are often stretched thin, taking an hour to donate blood is a powerful statement of solidarity and compassion. By donating blood, you become a vital part of a life-saving network, making a tangible difference in your community and beyond. So, roll up your sleeve and give the gift of life—your blood donation can make all the difference.</span>');
 
 
 
 INSERT INTO pages (page_id, page_name, page_type, page_data) VALUES
-(4, 'The Need For Blood', 'needforblood', '<span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify;">There are many reasons patients need blood. A common misunderstanding about blood usage is that accident victims are the patients who use the most blood. Actually, people needing the most blood include those:
-1) Being treated for cancer<br>
-2) Undergoing orthopedic surgeries<br>
-3) Undergoing cardiovascular surgeries<br>
+(4, 'The Need For Blood', 'needforblood', '<span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify;">There are many reasons patients need blood. A common misunderstanding about blood usage is that accident victims are the patients who use the most blood. Actually, people needing the most blood include those: 1) Being treated for cancer
+2) Undergoing orthopedic surgeries
+3) Undergoing cardiovascular surgeries
 4) Being treated for inherited blood disorders</span>');
 
 INSERT INTO pages (page_id, page_name, page_type, page_data) VALUES
 (5, 'Blood Tips', 'bloodtips', '<span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify;">
-1) You must be in good health. <br>
-2) Hydrate and eat a healthy meal before your donation.<br>
-3) You’re never too old to donate blood. <br>
-4) Rest and relaxed.<br>
-5) Don’t forget your FREE post-donation snack. 
+1) Your health needs to be good.
+2) Before you donate, stay hydrated and have a nutritious lunch.
+3) Giving blood is a never-ending endeavour.
+4) Take a nap and unwind.
+5) Recall to enjoy your complimentary post-donation snack. 
 </span>'),
 (6, 'Who you could Help', 'whoyouhelp', '<span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify;">
 Every 2 seconds, someone in the World needs blood. Donating blood can help:

@@ -62,6 +62,7 @@ $active ='donate';
 <div class="font-italic">Age<span style="color:red">*</span></div>
 <div><input type="text" name="age" class="form-control" required></div>
 </div>
+
 <div class="col-lg-4 mb-4">
 <div class="font-italic">Gender<span style="color:red">*</span></div>
 <div><select name="gender" class="form-control" required>
@@ -92,6 +93,7 @@ $active ='donate';
 <div class="font-italic">Address<span style="color:red">*</span></div>
 <div><textarea class="form-control" name="address" required></textarea></div></div>
 </div>
+
 <div class="row">
   <div class="col-lg-4 mb-4">
   <div><input type="submit" name="submit" class="btn btn-primary" value="Submit" style="cursor:pointer"></div>
