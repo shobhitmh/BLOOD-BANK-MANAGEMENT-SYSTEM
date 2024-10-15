@@ -1,3 +1,12 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+// Initialize $active variable if it's not set
+if (!isset($active)) {
+    $active = '';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,105 +14,131 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blood Bank & Donation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
     }
 
     .header {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
-      color: #FF0404;
-      position: sticky;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
+      padding: 15px 50px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .header a {
-      color: red;
-      text-align: center;
-      padding: 12px 20px;
-      text-decoration: none;
-      font-size: 18px;
-      line-height: 25px;
-      border-radius: 4px;
-      font-weight: bold;
-      
-      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    }
-
-    .header .logo {
+    .logo {
       display: flex;
       align-items: center;
-      font-size: 25px;
-      font-weight: bold;
-      color: #FF0404;
+      text-decoration: none;
+      color: #e74c3c;
+      font-weight: 600;
+      font-size: 24px;
     }
 
-    .header .logo img {
-      height: 100px;
-      margin-right: 20px;
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
     }
 
-    .header a:hover {
-      color: red;
-      transform: scale(1.08);
-    }
-
-    .header .header-right {
+    .nav-links {
       display: flex;
-      gap: 10px;
+      gap: 20px;
     }
 
-    @media screen and (max-width: 500px) {
-      .header {
+    .nav-links a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: #e74c3c;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
         flex-direction: column;
-        align-items: flex-start;
+        padding: 15px 20px;
       }
 
-      .header a {
-        display: block;
-        text-align: left;
-        width: 100%;
-      }
-
-      .header .header-right {
-        flex-direction: column;
-        width: 100%;
+      .nav-links {
+        margin-top: 15px;
       }
     }
 
-    a.act {
-      background: linear-gradient(to right, #fd746c 0%, #ff9068 100%);
-      color: white;
-      border-radius: 30px;
+    .dropdown {
+      position: relative;
+      display: inline-block;
     }
-
-    a.logo2 {
-      background-color: red;
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      right: 0;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
     }
   </style>
 </head>
 
 <body>
-  <div class="header">
-    <a href="home.php" class="logo" <?php if ($active == 'home') echo "class='logo2'"; ?>>
-      <img src="image\Blood-Donation-PNG-Picture.png" alt="Blood Bank & Donation Logo"> Blood Bank Management system
-    </a>
-    <div class="header-right">
-      <a href="about_us.php" <?php if ($active == 'about') echo "class='act'"; ?>>About Us</a>
-      <a href="donate_blood.php" <?php if ($active == 'donate') echo "class='act'"; ?>>Donate Blood</a>
-      <a href="need_blood.php" <?php if ($active == 'need') echo "class='act'"; ?>>Need Blood</a>
-      <a href="why_donate_blood.php" <?php if ($active == 'why') echo "class='act'"; ?>>Why Donate Blood</a>
-
-      <a href="contact_us.php" <?php if ($active == 'contact') echo "class='act'"; ?>>Contact Us</a>
+  <header class="header">
+    <div class="header-content">
+      <a href="home.php" class="logo">
+        <img src="image\Blood-Donation-PNG-Picture.png" alt="Blood Bank Logo">
+        Blood Bank & Donation
+      </a>
+      <nav class="nav-links">
+        <a href="home.php" <?php echo ($active == 'home') ? "class='active'" : ""; ?>>Home</a>
+        <a href="about_us.php" <?php echo ($active == 'about') ? "class='active'" : ""; ?>>About Us</a>
+        <a href="donate_blood.php" <?php echo ($active == 'donate') ? "class='active'" : ""; ?>>Donate</a>
+        <a href="need_blood.php" <?php echo ($active == 'need') ? "class='active'" : ""; ?>>Need Blood</a>
+        <a href="contact_us.php" <?php echo ($active == 'contact') ? "class='active'" : ""; ?>>Contact</a>
+        <?php
+        if (isset($_SESSION['user_id'])) {
+            echo '<div class="dropdown">';
+            echo '<a href="#" class="dropbtn"><i class="fas fa-user"></i> ' . htmlspecialchars($_SESSION['full_name'] ?? 'User') . '</a>';
+            echo '<div class="dropdown-content">';
+            echo '<a href="user_dashboard.php">Dashboard</a>';
+            echo '<a href="logout.php">Logout</a>';
+            echo '</div>';
+            echo '</div>';
+        } else {
+            echo '<a href="register.php" ' . ($active == 'register' ? "class='active'" : "") . '>Register</a>';
+            echo '<a href="login.php" ' . ($active == 'login' ? "class='active'" : "") . '>Login</a>';
+        }
+        ?>
+      </nav>
     </div>
-  </div>
+  </header>
 </body>
 
 </html>

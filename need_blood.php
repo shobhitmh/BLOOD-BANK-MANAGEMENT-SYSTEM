@@ -1,118 +1,139 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<style>
-h1 {
-            font-family: "Palatino";
-          }
-          h2 {
-    font-family: "Palatino";
-    /* Add any other styles you want */
-}
-h3 {
-            font-family: "Palatino";
-          }
-          h4 {
-            font-family: "Palatino";
-          }
-          a {
-            font-family: "Palatino";
-          }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Need Blood</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .page-header {
+            background-color: #dc3545;
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 40px;
+        }
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .btn-search {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+        .btn-search:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        .donor-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .donor-card:hover {
+            transform: translateY(-5px);
+        }
+        .donor-card .card-header {
+            background-color: #dc3545;
+            color: white;
+            font-weight: bold;
+        }
     </style>
 </head>
-
 <body>
-  <?php 
-  $active ='need';
-  include('head.php') ?>
+    <?php $active ='need'; include('head.php'); ?>
 
-  <div id="page-container" style="margin-top:50px; position: relative;min-height: 84vh;">
-    <div class="container">
-    <div id="content-wrap" style="padding-bottom:50px;">
-
-  <div class="row">
-      <div class="col-lg-6">
-          <h1 class="mt-4 mb-3">Need Blood</h1>
-
+    <div class="page-header">
+        <div class="container">
+            <h1 class="text-center">Need Blood</h1>
         </div>
-  </div>
-  <form name="needblood" action="" method="post">
-  <div class="row">
-  <div class="col-lg-4 mb-4">
-  <div class="font-italic">Blood Group<span style="color:red">*</span></div>
-  <div><select name="blood" class="form-control" required>
-    <option value=""selected disabled>Select</option>
-    <?php
-      include 'conn.php';
-      $sql= "select * from blood";
-      $result=mysqli_query($conn,$sql) or die("query unsuccessful.");
-    while($row=mysqli_fetch_assoc($result)){
-     ?>
-     <option value=" <?php echo $row['blood_id'] ?>"> <?php echo $row['blood_group'] ?> </option>
-    <?php } ?>
-</select>
-</div>
-</div>
+    </div>
 
-<div class="col-lg-4 mb-4">
-<div class="font-italic">Reason, why do you need blood?<span style="color:red">*</span></div>
-<div><textarea class="form-control" name="address" required></textarea></div></div>
-</div>
-<div class="row">
-<div class="col-lg-4 mb-4">
-<div><input type="submit" name="search" class="btn btn-primary" value="Search" style="cursor:pointer"></div>
-</div>
-
-</div><div class="row">
-<?php if(isset($_POST['search'])){
-
-  $bg=$_POST['blood'];
-  $sql= "select * from donor_details join blood where donor_details.donor_blood=blood.blood_id AND donor_blood='{$bg}' order by rand() limit 5";
-  $result=mysqli_query($conn,$sql) or die("query unsuccessful.");
-    if(mysqli_num_rows($result)>0)   {
-    while($row = mysqli_fetch_assoc($result)) {
-      ?>
-
-      <div class="col-lg-4 col-sm-6 portfolio-item" ><br>
-      <div class="card" style="width:300px">
-          <img class="card-img-top" src="image\Untitled design (1).png" alt="Card image" style="width:100%;height:300px">
-          <div class="card-body">
-            <h3 class="card-title"><?php echo $row['donor_name']; ?></h3>
-            <p class="card-text">
-              <b>Blood Group : </b> <b><?php echo $row['blood_group']; ?></b><br>
-              <b>Mobile No. : </b> <?php echo $row['donor_number']; ?><br>
-              <b>Gender : </b><?php echo $row['donor_gender']; ?><br>
-              <b>Age : </b> <?php echo $row['donor_age']; ?><br>
-              <b>Address : </b> <?php echo $row['donor_address']; ?><br>
-            </p>
-
-          </div>
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-container">
+                    <form name="needblood" action="" method="post">
+                        <div class="form-group">
+                            <label for="blood"><strong>Blood Group</strong></label>
+                            <select name="blood" class="form-control" required>
+                                <option value="" selected disabled>Select Blood Group</option>
+                                <?php
+                                include 'conn.php';
+                                $sql= "select * from blood";
+                                $result=mysqli_query($conn,$sql) or die("query unsuccessful.");
+                                while($row=mysqli_fetch_assoc($result)){
+                                    echo "<option value='{$row['blood_id']}'>{$row['blood_group']}</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="address"><strong>Reason for needing blood</strong></label>
+                            <textarea class="form-control" name="address" rows="3" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" name="search" class="btn btn-search btn-lg">
+                                <i class="fas fa-search mr-2"></i>Search for Donors
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-  </div>
 
-  <?php
-    }
-  }
-    else
-    {
+        <?php
+        if(isset($_POST['search'])) {
+            $bg = $_POST['blood'];
+            $sql = "SELECT donor_details.*, blood.blood_group 
+                    FROM donor_details 
+                    JOIN blood ON donor_details.donor_blood = blood.blood_id 
+                    WHERE blood.blood_id = '$bg' 
+                    ORDER BY RAND() 
+                    LIMIT 5";
+            $result = mysqli_query($conn, $sql) or die("Query unsuccessful: " . mysqli_error($conn));
+            
+            if(mysqli_num_rows($result) > 0) {
+                echo "<h2 class='text-center mt-5 mb-4'>Available Donors</h2>";
+                echo "<div class='row'>";
+                while($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                    <div class="col-md-4 mb-4">
+                        <div class="card donor-card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0"><?php echo $row['donor_name']; ?></h5>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Blood Group:</strong> <?php echo $row['blood_group']; ?></p>
+                                <p><strong>Mobile No.:</strong> <?php echo $row['donor_number']; ?></p>
+                                <p><strong>Gender:</strong> <?php echo $row['donor_gender']; ?></p>
+                                <p><strong>Age:</strong> <?php echo $row['donor_age']; ?></p>
+                                <p><strong>Address:</strong> <?php echo $row['donor_address']; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+                echo "</div>";
+            } else {
+                echo '<div class="alert alert-danger mt-5">No Donor Found For your search Blood group</div>';
+            }
+        }
+        ?>
+    </div>
 
-        echo '<div class="alert alert-danger">No Donor Found For your search Blood group </div>';
+    <?php include 'footer.php' ?>
 
-    }
-} ?>
-</div>
-</div>
-</div>
-<?php include 'footer.php' ?>
-</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

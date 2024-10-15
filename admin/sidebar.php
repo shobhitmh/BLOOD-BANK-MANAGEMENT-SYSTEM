@@ -68,17 +68,52 @@ border-radius:10px;
     float: none;
   }
 }
+
+.sidebar {
+    background-color: #343a40;
+    color: #fff;
+    min-height: 100vh;
+    padding-top: 20px;
+}
+.sidebar a {
+    color: #fff;
+    padding: 10px 20px;
+    display: block;
+    transition: all 0.3s;
+}
+.sidebar a:hover, .sidebar a.active {
+    background-color: #dc3545;
+    text-decoration: none;
+}
+.sidebar i {
+    margin-right: 10px;
+}
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+    }
+}
 </style>
 </head>
 <body>
 
-<div class="sidebar" ><b>
-  <a href="dashboard.php"   <?php if($active=='dashboard') echo "class='act'"; ?>><span class="glyphicon glyphicon-dashboard"></span>&nbsp&nbspDashboard</a>
-  <a href="add_donor.php"   <?php if($active=='add') echo "class='act'"; ?>><span class="glyphicon glyphicon-pencil"></span>&nbsp&nbspAdd Donor</a>
-  <a href="donor_list.php"   <?php if($active=='list') echo "class='act'"; ?>><span class="glyphicon glyphicon-list-alt"></span>&nbsp&nbsp Donor List</a>
-  <a href="query.php"   <?php if($active=='query') echo "class='act'"; ?>><span class="glyphicon glyphicon-check"></span>&nbsp&nbspCheck Contactus Query</a>
-
-    <a href="pages.php"   <?php if($active=='pages') echo "class='act'"; ?>><span class="glyphicon glyphicon-edit"></span>&nbsp&nbspEdit Pages</a>
-  <a href="update_contact.php"   <?php if($active=='contact') echo "class='act'"; ?>><span class="glyphicon glyphicon-edit"></span>&nbsp&nbspUpdate Contact Info</a>
-
+<div class="sidebar">
+    <a href="dashboard.php" class="<?php echo ($active == 'dashboard') ? 'active' : ''; ?>">
+        <i class="fas fa-tachometer-alt"></i> Dashboard
+    </a>
+    <a href="add_donor.php" class="<?php echo ($active == 'add') ? 'active' : ''; ?>">
+        <i class="fas fa-user-plus"></i> Add Donor
+    </a>
+    <a href="donor_list.php" class="<?php echo ($active == 'list') ? 'active' : ''; ?>">
+        <i class="fas fa-list"></i> Donor List
+    </a>
+    <a href="query.php" class="<?php echo ($active == 'query') ? 'active' : ''; ?>">
+        <i class="fas fa-question-circle"></i> Check Queries
+    </a>
+    <a href="pages.php" class="<?php echo ($active == 'pages') ? 'active' : ''; ?>">
+        <i class="fas fa-file-alt"></i> Edit Pages
+    </a>
+    <a href="update_contact.php" class="<?php echo ($active == 'contact') ? 'active' : ''; ?>">
+        <i class="fas fa-address-book"></i> Update Contact
+    </a>
 </div>

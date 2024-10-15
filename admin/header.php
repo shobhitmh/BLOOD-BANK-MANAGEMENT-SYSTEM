@@ -4,100 +4,50 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
         .navbar {
-            background-color: white;
-            padding: 15px 10px;
-            color: #FF0404;
-            border: none;
-            border-radius: 0;
-            margin-bottom: 0;
-            font-size: 16px;
-            letter-spacing: 1px;
-            transition: all 0.4s ease;
+            background-color: #dc3545;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
         }
-
-        .navbar a {
+        .navbar-brand, .navbar-nav .nav-link {
             color: white !important;
-            text-align: center;
-            padding: 12px;
-            text-decoration: none;
-            font-size: 18px;
-            line-height: 25px;
-            transition: background-color 0.3s, color 0.3s;
         }
-
-        .navbar .navbar-brand {
-            font-size: 25px;
+        .navbar-brand {
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #F51A14 !important;
-            transition: color 0.3s;
         }
-
-        .navbar a:hover,
-        .navbar .navbar-brand:hover {
-            background-color: #283593;
-            color: #FF0404 !important;
-            border-radius: 5px;
-        }
-
-        .navbar .navbar-right a {
-            float: none;
-            display: block;
-            text-align: left;
-        }
-
-        .navbar .dropdown-menu {
-            background-color: white;
+        .dropdown-menu {
             border: none;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0,0,0,.1);
         }
-
-        .navbar .dropdown-menu a {
-            color: white !important;
-            padding: 10px 20px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .navbar .dropdown-menu a:hover {
-            background-color: red;
-            color: #FFFFFF !important;
-        }
-
-        .navbar .dropdown-menu a.logout {
-            color: #D35400 !important;
-        }
-
-        .navbar .dropdown-menu a.logout:hover {
-            background-color: red;
-            color: #FFFFFF !important;
-        }
-
-        .navbar .dropdown-menu a.change-password {
-            color: #DC7633 !important;
-        }
-
-        .navbar .dropdown-menu a.change-password:hover {
-            background-color: red;
-            color: #FFFFFF !important;
+        .dropdown-item:hover {
+            background-color: #dc3545;
+            color: white;
         }
     </style>
 </head>
 
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="dashboard.php">Admin Panel</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-weight:bold;">
-                    <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="dashboard.php">Admin Panel</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i>
                     <?php
                     include 'conn.php';
                     $username = $_SESSION['username'];
@@ -106,12 +56,17 @@
                     $row = mysqli_fetch_assoc($result);
                     echo "Hello " . $row['admin_name'];
                     ?>
-                    <span class="caret"></span>
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a class="change-password" href="change_password.php">Change Password</a></li>
-                    <li><a class="logout" href="logout.php">Logout</a></li>
-                </ul>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="change_password.php"><i class="fas fa-key"></i> Change Password</a>
+                    <a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </li>
+            <li class="nav-item <?php if($active=='register') echo 'active';?>">
+                <a class="nav-link" href="register.php">Register</a>
+            </li>
+            <li class="nav-item <?php if($active=='login') echo 'active';?>">
+                <a class="nav-link" href="login.php">Login</a>
             </li>
         </ul>
     </div>

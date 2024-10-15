@@ -1,77 +1,110 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Blood Bank Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-<head>  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script></head>
-<body background="admin_image\blood-cells.jpg">
+    .login-container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
 
+    .login-container h1 {
+      text-align: center;
+      color: #e74c3c;
+      margin-bottom: 30px;
+    }
 
-  <form class="" action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
+    .form-group {
+      margin-bottom: 20px;
+    }
 
-    <div class="container" style="margin-top:200px;">
-      <div class="row justify-content-center">
-          <div class="col-lg-6">
-              <h1 class="mt-4 mb-3" style="color:#D2F015 ;">
-                  Blood Bank & Management
-                  <br>Admin Login Portal
-                </h1>
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
 
-            </div>
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #e74c3c;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #c0392b;
+    }
+
+    .error-message {
+      color: #e74c3c;
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Admin Login</h1>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
       </div>
-      <div class="card" style="height:250px; background-image:url('admin_image/glossy1.jpg');">
-          <div class="card-body">
-
-      <div class="row justify-content-lg-center justify-content-mb-center" >
-      <div class="col-lg-6 mb-6 ">
-      <div class="font-italic" style="font-weight:bold">Username<span style="color:red">*</span></div>
-      <div><input type="text" name="username" placeholder="Enter your username" class="form-control" value="" required></div>
-    </div>
-    </div>
-    <div class="row justify-content-lg-center justify-content-mb-center">
-    <div class="col-lg-6 mb-6 "><br>
-    <div class="font-italic"style="font-weight:bold">Password<span style="color:red">*</span></div>
-    <div><input type="password" name="password" placeholder="Enter your Password" class="form-control" value="" required></div>
-    </div>
-  </div>
-  <div class="row justify-content-lg-center justify-content-mb-center">
-    <div class="col-lg-4 mb-4 " style="text-align:center"><br>
-    <div><input type="submit" name="login" class="btn btn-primary" value="LOGIN" style="cursor:pointer"></div>
-    </div>
-  </div>
-    </div>
-  </div></div>
-<br>
-  <?php
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit" name="login" class="submit-btn">Login</button>
+    </form>
+    <?php
     include 'conn.php';
-
-  if(isset($_POST["login"])){
-
-    $username=mysqli_real_escape_string($conn,$_POST["username"]);
-    $password=mysqli_real_escape_string($conn,$_POST["password"]);
-
-    $sql="SELECT * from admin_info where admin_username='$username' and admin_password='$password'";
-    $result=mysqli_query($conn,$sql) or die("query failed.");
-
-    if(mysqli_num_rows($result)>0)
-    {
-      while($row=mysqli_fetch_assoc($result)){
-        session_start();
-         $_SESSION['loggedin'] = true;
-        $_SESSION["username"]=$username;
-        header("Location: dashboard.php");
+    if(isset($_POST["login"])){
+      $username = mysqli_real_escape_string($conn, $_POST["username"]);
+      $password = mysqli_real_escape_string($conn, $_POST["password"]);
+      $sql = "SELECT * FROM admin_info WHERE admin_username='$username' AND admin_password='$password'";
+      $result = mysqli_query($conn, $sql) or die("query failed.");
+      if(mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)){
+          session_start();
+          $_SESSION['loggedin'] = true;
+          $_SESSION["username"] = $username;
+          header("Location: dashboard.php");
+        }
+      } else {
+        echo '<p class="error-message">Invalid username or password!</p>';
       }
     }
-    else {
-      echo '<div class="alert alert-danger" style="font-weight:bold"> Username and Password are not matched!</div>';
-    }
-
-  }
-   ?>
- </form>
+    ?>
+  </div>
 </body>
 </html>

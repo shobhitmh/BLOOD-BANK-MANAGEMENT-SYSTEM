@@ -1,164 +1,135 @@
-<html>
-
+<?php include 'session.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<style>
-
-#sidebar{position:relative;margin-top:-20px}
-#content{position:relative;margin-left:210px}
-@media screen and (max-width: 600px) {
-  #content {
-    position:relative;margin-left:auto;margin-right:auto;
-  }
-}
-  #he{
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      padding: 3px 7px;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 3px;
-      align:center
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .content {
+            padding: 20px;
+        }
+        .table-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,.1);
+        }
+    </style>
 </head>
-<?php
-include 'conn.php';
-  include 'session.php';
-  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-  ?>
-<body style="color:black">
-<div id="header">
-<?php include 'header.php';
-?>
-</div>
-<div id="sidebar">
-<?php $active="list"; include 'sidebar.php'; ?>
-
-</div>
-<div id="content" >
-  <div class="content-wrapper">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12 lg-12 sm-12">
-
-          <h1 class="page-title">Donor List</h1>
-
-        </div>
-
-      </div>
-      <hr>
-      <?php
-        include 'conn.php';
-
-        $limit = 10;
-        if(isset($_GET['page'])){
-          $page = $_GET['page'];
-        }else{
-          $page = 1;
-        }
-        $offset = ($page - 1) * $limit;
-        $count=$offset+1;
-        $sql= "select * from donor_details join blood where donor_details.donor_blood=blood.blood_id LIMIT {$offset},{$limit}";
-        $result=mysqli_query($conn,$sql);
-        if(mysqli_num_rows($result)>0)   {
-       ?>
-
-       <div class="table-responsive">
-      <table class="table table-bordered" style="text-align:center">
-          <thead style="text-align:center">
-          <th style="text-align:center">S.no</th>
-          <th style="text-align:center">Name</th>
-          <th style="text-align:center">Mobile Number</th>
-          <th style="text-align:center">Email Id</th>
-          <th style="text-align:center">Age</th>
-          <th style="text-align:center">Gender</th>
-          <th style="text-align:center">Blood Group</th>
-          <th style="text-align:center">Address</th>
-          <th style="text-align:center">Action</th>
-          </thead>
-          <tbody>
-            <?php
-            while($row = mysqli_fetch_assoc($result)) { ?>
-          <tr>
-                  <td><?php echo $count++; ?></td>
-                  <td><?php echo $row['donor_name']; ?></td>
-                  <td><?php echo $row['donor_number']; ?></td>
-                  <td><?php echo $row['donor_mail']; ?></td>
-                  <td><?php echo $row['donor_age']; ?></td>
-                  <td><?php echo $row['donor_gender']; ?></td>
-                    <td><?php echo $row['blood_group']; ?></td>
-                    <td><?php echo $row['donor_address']; ?></td>
-                    <td id="he" style="width:100px">
-                    <a style="background-color:aqua" href='delete.php?id=<?php echo $row['donor_id']; ?>'> Delete </a>
-                </td>
-              </tr>
-            <?php } ?>
-          </tbody>
-      </table>
-    </div>
-    <?php } ?>
-
-
-
-
-
-<div class="table-responsive"style="text-align:center;align:center">
+<body>
     <?php
-    $sql1 = "SELECT * FROM donor_details";
-    $result1 = mysqli_query($conn, $sql1) or die("Query Failed.");
-
-    if(mysqli_num_rows($result1) > 0){
-
-      $total_records = mysqli_num_rows($result1);
-
-      $total_page = ceil($total_records / $limit);
-
-      echo '<ul class="pagination admin-pagination">';
-      if($page > 1){
-        echo '<li><a href="donor_list.php?page='.($page - 1).'">Prev</a></li>';
-      }
-      for($i = 1; $i <= $total_page; $i++){
-        if($i == $page){
-          $active = "active";
-        }else{
-          $active = "";
-        }
-        echo '<li class="'.$active.'"><a href="donor_list.php?page='.$i.'">'.$i.'</a></li>';
-      }
-      if($total_page > $page){
-        echo '<li><a href="donor_list.php?page='.($page + 1).'">Next</a></li>';
-      }
-
-      echo '</ul>';
-    }
+    include 'conn.php';
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     ?>
-  </div>
-  </div>
-</div>
-</div>
-<?php }
-   else {
-       echo '<div class="alert alert-danger"><b> Please Login First To Access Admin Portal.</b></div>';
-       ?>
-       <form method="post" name="" action="login.php" class="form-horizontal">
-         <div class="form-group">
-           <div class="col-sm-8 col-sm-offset-4" style="float:left">
-
-             <button class="btn btn-primary" name="submit" type="submit">Go to Login Page</button>
-           </div>
-         </div>
-       </form>
-   <?php }
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 p-0">
+                <?php $active="list"; include 'sidebar.php'; ?>
+            </div>
+            <div class="col-md-10">
+                <?php include 'header.php'; ?>
+                <div class="content">
+                    <h1 class="mb-4">Donor List</h1>
+                    <div class="table-container">
+                        <?php
+                        $limit = 10;
+                        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                        $offset = ($page - 1) * $limit;
+                        $count = $offset + 1;
+                        $sql = "SELECT donor_details.*, blood.blood_group 
+                                FROM donor_details 
+                                JOIN blood ON donor_details.donor_blood = blood.blood_id 
+                                ORDER BY donor_id DESC LIMIT {$offset},{$limit}";
+                        $result = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                        ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>S.no</th>
+                                        <th>Name</th>
+                                        <th>Mobile Number</th>
+                                        <th>Email Id</th>
+                                        <th>Age</th>
+                                        <th>Gender</th>
+                                        <th>Blood Group</th>
+                                        <th>Address</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $count++; ?></td>
+                                        <td><?php echo $row['donor_name']; ?></td>
+                                        <td><?php echo $row['donor_number']; ?></td>
+                                        <td><?php echo $row['donor_mail']; ?></td>
+                                        <td><?php echo $row['donor_age']; ?></td>
+                                        <td><?php echo $row['donor_gender']; ?></td>
+                                        <td><?php echo $row['blood_group']; ?></td>
+                                        <td><?php echo $row['donor_address']; ?></td>
+                                        <td>
+                                            <a href='delete.php?id=<?php echo $row['donor_id']; ?>' class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <?php
+                        // Pagination code
+                        $sql1 = "SELECT * FROM donor_details";
+                        $result1 = mysqli_query($conn, $sql1) or die("Query Failed.");
+                        if(mysqli_num_rows($result1) > 0){
+                            $total_records = mysqli_num_rows($result1);
+                            $total_page = ceil($total_records / $limit);
+                            echo '<ul class="pagination justify-content-center">';
+                            if($page > 1){
+                                echo '<li class="page-item"><a class="page-link" href="donor_list.php?page='.($page - 1).'">Prev</a></li>';
+                            }
+                            for($i = 1; $i <= $total_page; $i++){
+                                if($i == $page){
+                                    $active = "active";
+                                }else{
+                                    $active = "";
+                                }
+                                echo '<li class="page-item '.$active.'"><a class="page-link" href="donor_list.php?page='.$i.'">'.$i.'</a></li>';
+                            }
+                            if($total_page > $page){
+                                echo '<li class="page-item"><a class="page-link" href="donor_list.php?page='.($page + 1).'">Next</a></li>';
+                            }
+                            echo '</ul>';
+                        }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+    } else {
+        echo '<div class="alert alert-danger"><b>Please Login First To Access Admin Portal.</b></div>';
+        ?>
+        <form method="post" action="login.php" class="form-inline">
+            <button class="btn btn-primary ml-2" name="submit" type="submit">Go to Login Page</button>
+        </form>
+    <?php }
     ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
